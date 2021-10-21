@@ -6,6 +6,7 @@ import PokeDetail from "../views/PokeDetail";
 import Home from "../views/Home";
 import Search from "../views/Search";
 import Goals from "../views/Goals";
+import Age from "../views/Age";
 
 export default function Routes() {
   return(
@@ -28,6 +29,9 @@ export default function Routes() {
         </Route>
         <Route path="/goals" >
           <Goals />
+        </Route>
+        <Route path="/age" >
+          <Age/>
         </Route>
         <Route>
           <FourOFour/>

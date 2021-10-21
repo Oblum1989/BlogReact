@@ -11,6 +11,7 @@ export default function NavBar({children}) {
           <li className="navbar-bar__item"><Link to={`/pokemons`}>Pokemons</Link></li>
           <li className="navbar-bar__item"><Link to={`/search`}>Search</Link></li>
           <li className="navbar-bar__item"><Link to={`/goals`}>Goals</Link></li>
+          <li className="navbar-bar__item"><Link to={`/age`}>User Age</Link></li>
         </ul>
       </div>
       {children}

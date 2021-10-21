@@ -7,6 +7,8 @@ export default function ExpenseChart({ expenses }) {
     { label: "Mar", value: 0 },
     { label: "Apr", value: 0 },
     { label: "May", value: 0 },
+    { label: "Jun", value: 0 },
+    { label: "Jul", value: 0 },
     { label: "Aug", value: 0 },
     { label: "Sep", value: 0 },
     { label: "Oct", value: 0 },
@@ -16,6 +18,7 @@ export default function ExpenseChart({ expenses }) {
 
   for (const expense of expenses) {
     const expenseMonth = expense.date.split("-")[1];
+    console.log(expenseMonth)
     chartDataPoints[parseInt(expenseMonth)].value += expense.amount;
   }
   return <Chart dataPoints={chartDataPoints} />;
