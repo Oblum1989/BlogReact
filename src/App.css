@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+*{
+  box-sizing:  border-box;
+}
+
+body{
+  margin: 0;
+}
+html{
+  font-family: sans-serif;
+}
