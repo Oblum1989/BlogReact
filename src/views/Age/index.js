@@ -14,9 +14,9 @@ const USERDATA = [
 ]
 
 export default function Age() {
-  const [userList, setUserList] = useState(USERDATA)
+  const [usersList, setUsersList] = useState(USERDATA)
   const addUserHandler = (uName, uAge) => {
-    setUserList(prevUsersList => {
+    setUsersList(prevUsersList => {
       return [...prevUsersList, {name: uName, age: uAge, id: Math.random().toString()}]
     })
   }
@@ -24,7 +24,7 @@ export default function Age() {
     <NavBar>
       <div>
         <AddUser onAddUser={addUserHandler}/>
-        <UserList users={userList}/>
+        <UserList users={usersList}/>
       </div>
     </NavBar>
   );
