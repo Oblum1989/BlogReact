@@ -11,6 +11,7 @@ import Login from "../views/Login";
 import NavBar from "../views/UI/Navbar";
 import { useContext, useEffect } from "react";
 import PokemonContext from "../context/pokemons";
+import Restaurant from "../views/Restaurant";
 
 export default function Routes() {
   const { isLoggedIn, setIsLoggedIn, loginHandler, logoutHandler } =
@@ -48,6 +49,9 @@ export default function Routes() {
         </Route>
         <Route path="/age">
           <Age />
+        </Route>
+        <Route path="/restaurant">
+          <Restaurant />
         </Route>
         <Route>
           <FourOFour />
