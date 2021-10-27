@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavBar from '../UI/NavBar';
 
 import CourseGoalList from './components/CourseGoals/CourseGoalList';
 import CourseInput from './components/CourseGoals/CourseInput';
@@ -37,7 +36,7 @@ const Goals = () => {
   }
 
   return (
-    <NavBar>
+    <>
       <div>
         <section id="goal-form">
           <CourseInput onAddGoal={addGoalHandler} />
@@ -46,7 +45,7 @@ const Goals = () => {
           {content}
         </section>
       </div>
-    </NavBar>
+    </>
   );
 };
 

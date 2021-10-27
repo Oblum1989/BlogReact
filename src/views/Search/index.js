@@ -4,7 +4,6 @@ import SearchResults from "./components/SearchResults";
 
 import data from "../../data/user.json";
 import "./style.css";
-import NavBar from "../UI/NavBar";
 
 export default function Search() {
   const [isAtTop, setIsAtTop] = useState(false);
@@ -39,7 +38,7 @@ export default function Search() {
     setResults([]);
   };
   return (
-    <NavBar>
+    <>
       <div className={`search ${isAtTop ? "search--top" : "search--center"}`}>
         <SearchBox
           onSearch={handleSearchClick}
@@ -48,6 +47,6 @@ export default function Search() {
         />
         <SearchResults results={results} isSearching={isAtTop} />
       </div>
-    </NavBar>
+    </>
   );
 }

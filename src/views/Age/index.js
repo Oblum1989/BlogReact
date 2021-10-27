@@ -1,5 +1,4 @@
 import { useState } from "react";
-import NavBar from "../UI/NavBar";
 import AddUser from "./components/Users/AddUser";
 import UserList from "./components/Users/UserList";
 import "./index.css";
@@ -21,11 +20,11 @@ export default function Age() {
     })
   }
   return (
-    <NavBar>
+    <>
       <div>
         <AddUser onAddUser={addUserHandler}/>
         <UserList users={usersList}/>
       </div>
-    </NavBar>
+    </>
   );
 }

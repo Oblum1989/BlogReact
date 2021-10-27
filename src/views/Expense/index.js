@@ -3,7 +3,6 @@ import ExpenseFilter from "./components/ExpenseFilter";
 import NewExpense from "./components/NewExpense";
 import ExpenseList from "./components/ExpenseList";
 import Card from "./UI/Card";
-import NavBar from "../UI/NavBar";
 import "./index.css";
 import ExpenseChart from "./components/ExpenseChart";
 
@@ -47,7 +46,7 @@ export default function Expense() {
   });
 
   return (
-    <NavBar>
+    <>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Card className="expenses">
         <ExpenseFilter
@@ -57,6 +56,6 @@ export default function Expense() {
         <ExpenseChart expenses={filteredExpenses}/>
         <ExpenseList items={filteredExpenses} />
       </Card>
-    </NavBar>
+    </>
   );
 }

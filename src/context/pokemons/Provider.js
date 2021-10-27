@@ -8,6 +8,7 @@ export default function PokemonProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getPokemons = async () => {
     try {
@@ -44,6 +45,15 @@ export default function PokemonProvider({ children }) {
       setIsLoading(false);
     }
   };
+  const loginHandler = (email, password) => {
+    localStorage.setItem('isLoggedIn', '1')
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    localStorage.setItem('isLoggedIn', '0')
+    setIsLoggedIn(false);
+  };
   return (
     <PokemonContext.Provider
       value={{
@@ -54,6 +64,10 @@ export default function PokemonProvider({ children }) {
         isLoading,
         errorMessage,
         hasError,
+        isLoggedIn,
+        setIsLoggedIn,
+        loginHandler,
+        logoutHandler,
       }}
     >
       {children}

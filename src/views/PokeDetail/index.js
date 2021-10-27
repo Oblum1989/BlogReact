@@ -3,7 +3,6 @@ import { useParams } from "react-router"
 import ErrorMessage from "../../components/ErrorMessage"
 import Loading from "../../components/Loading"
 import PokemonContext from "../../context/pokemons"
-import NavBar from "../UI/NavBar"
 import PokeStats from "./components/PokeStats"
 
 export default function PokeDetail() {
@@ -16,7 +15,7 @@ export default function PokeDetail() {
   if(isLoading) return <Loading title="Cargando pokemon..."/>
 
   return(
-    <NavBar>
+    <>
       <div>
         {hasError ? <ErrorMessage message={errorMessage} /> : (
           <>
@@ -30,6 +29,6 @@ export default function PokeDetail() {
           </>
         )}
       </div>
-    </NavBar>
+    </>
   )
 }

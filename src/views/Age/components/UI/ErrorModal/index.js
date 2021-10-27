@@ -2,7 +2,7 @@ import Button from "../Button";
 import Card from "../Card";
 import styles from "./index.module.css";
 
-export default function ErrorModal({ title, message, onConfirm}) {
+export default function ErrorModal({ title, message, onConfirm }) {
   return (
     <div>
       <div className={styles.backdrop} onClick={onConfirm} />
@@ -14,7 +14,7 @@ export default function ErrorModal({ title, message, onConfirm}) {
           <p>{message}</p>
         </div>
         <footer className={styles.actions}>
-          <Button onClick={onConfirm} >Okay</Button>
+          <Button onClick={onConfirm}>Okay</Button>
         </footer>
       </Card>
     </div>
