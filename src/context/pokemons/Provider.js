@@ -54,6 +54,18 @@ export default function PokemonProvider({ children }) {
     localStorage.setItem('isLoggedIn', '0')
     setIsLoggedIn(false);
   };
+
+  const addItemToCartHandler = (item) => {}
+
+  const removeItemToCartHandler = (item) => {}
+
+  const cartContext = {
+    items: [],
+    totalAmount: 0,
+    addItem: addItemToCartHandler,
+    removeItem: removeItemToCartHandler,
+  }
+
   return (
     <PokemonContext.Provider
       value={{
@@ -68,6 +80,7 @@ export default function PokemonProvider({ children }) {
         setIsLoggedIn,
         loginHandler,
         logoutHandler,
+        cartContext,
       }}
     >
       {children}
