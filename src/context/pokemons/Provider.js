@@ -1,6 +1,23 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import apiCall from "../../api";
 import PokemonContext from "./index";
+
+const defaultCarState = {
+  items: [],
+  totalAmount: 0
+}
+
+const cartReducer = (state, action) => {
+  if (action.type === 'ADD') {
+    const updatedItems = state.items.concat(action.item)
+    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount
+    return{
+      items: updatedItems,
+      totalAmount: updatedTotalAmount
+    }
+  }
+  return defaultCarState
+}
 
 export default function PokemonProvider({ children }) {
   const [pokemons, setPokemons] = useState([]);
@@ -9,6 +26,7 @@ export default function PokemonProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [carState, dispatchCartAction] = useReducer(cartReducer, defaultCarState)
 
   const getPokemons = async () => {
     try {
@@ -55,13 +73,17 @@ export default function PokemonProvider({ children }) {
     setIsLoggedIn(false);
   };
 
-  const addItemToCartHandler = (item) => {}
+  const addItemToCartHandler = (item) => {
+    dispatchCartAction({type: 'ADD', item: item})
+  }
 
-  const removeItemToCartHandler = (item) => {}
+  const removeItemToCartHandler = (id) => {
+    dispatchCartAction({type: 'REMOVE', item: id})
+  }
 
   const cartContext = {
-    items: [],
-    totalAmount: 0,
+    items: carState.items,
+    totalAmount: carState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartHandler,
   }
