@@ -135,6 +135,7 @@ export default function PokemonProvider({ children }) {
         getPokemonDetail,
         pokemonDetail,
         isLoading,
+        setIsLoading,
         errorMessage,
         hasError,
         isLoggedIn,
