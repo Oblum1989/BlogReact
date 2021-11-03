@@ -7,6 +7,8 @@ import styles from "./index.module.css";
 
 export default function Cart({ onHideCart }) {
   const [isCheckout, setIsCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const { cartContext } = useContext(PokemonContext);
   const hasItems = cartContext.items.length > 0;
 
@@ -19,6 +21,20 @@ export default function Cart({ onHideCart }) {
   const orderHandler = () => {
     setIsCheckout(true);
   };
+
+  const submitOrderHandler = async (userData) => {
+    setIsSubmitting(true)
+    await fetch('https://react-blog-6ce8f-default-rtdb.firebaseio.com/orders.json',{
+      method: 'POST',
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: cartContext.items
+      })
+    })
+    setIsSubmitting(false)
+    setDidSubmit(true)
+    cartContext.clearCart()
+  }
 
   const cartItems = (
     <ul className={styles["cart-items"]}>
@@ -45,15 +61,35 @@ export default function Cart({ onHideCart }) {
     </div>
   )
 
-  return (
-    <Modal onClick={onHideCart}>
+  const cartModalContent = (
+    <>
       {cartItems}
       <div className={styles.total}>
         <span>Total Amount</span>
         <span>{cartContext.totalAmount.toFixed(2)}</span>
       </div>
-      {isCheckout && <Checkout onCancel={onHideCart} />}
+      {isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={onHideCart} />}
       {!isCheckout && modalActions}
+    </>
+  )
+
+  const isSubmittingModalContent = <p>Sending order Data...</p>
+  const didSubmitModalContent = (
+    <>
+      <p>Successfully sent the order...</p>
+      <div className={styles.actions}>
+      <button className={styles.button} onClick={onHideCart}>
+        Close
+      </button>
+    </div>
+    </>
+  )
+
+  return (
+    <Modal onClick={onHideCart}>
+      { !isSubmitting && !didSubmit && cartModalContent}
+      { isSubmitting && isSubmittingModalContent }
+      { didSubmit && didSubmit &&  didSubmitModalContent }
     </Modal>
   );
 }
