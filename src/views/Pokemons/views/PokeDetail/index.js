@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router"
-import ErrorMessage from "../../components/ErrorMessage"
-import Loading from "../../components/Loading"
-import PokemonContext from "../../context/pokemons"
+import ErrorMessage from "../../../../components/ErrorMessage"
+import Loading from "../../../../components/Loading"
+import PokemonContext from "../../../../context/pokemons"
 import PokeStats from "./components/PokeStats"
 
 export default function PokeDetail() {

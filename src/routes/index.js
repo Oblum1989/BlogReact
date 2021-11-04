@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import FourOFour from "../views/404";
 import Expense from "../views/Expense";
 import Pokemons from "../views/Pokemons";
-import PokeDetail from "../views/PokeDetail";
+import PokeDetail from "../views/Pokemons/views/PokeDetail";
 import Home from "../views/Home";
 import Search from "../views/Search";
 import Goals from "../views/Goals";
