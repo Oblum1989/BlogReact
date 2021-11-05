@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import classes from './index.module.css';
+import classes from "./index.module.css";
 
 const Card = (props) => {
   return (

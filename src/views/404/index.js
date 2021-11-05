@@ -1,6 +1,6 @@
 export default function FourOFour() {
   return(
-    <div>
+    <div className='centered'>
       <p>Lo siento, no encontre lo que estabas buscando</p>
     </div>
   )

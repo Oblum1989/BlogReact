@@ -12,6 +12,9 @@ import NavBar from "../views/UI/Navbar";
 import { useContext, useEffect } from "react";
 import PokemonContext from "../context/pokemons";
 import Restaurant from "../views/Restaurant";
+import Quotes from "../views/Quotes";
+import NewQuote from "../views/Quotes/pages/NewQuote";
+import QuoteDetail from "../views/Quotes/pages/QuoteDetail";
 
 export default function Routes() {
   const { isLoggedIn, setIsLoggedIn, loginHandler, logoutHandler } =
@@ -52,6 +55,15 @@ export default function Routes() {
         </Route>
         <Route path="/restaurant">
           <Restaurant />
+        </Route>
+        <Route path="/quotes" exact>
+          <Quotes />
+        </Route>
+        <Route path="/quotes/:quoteId">
+          <QuoteDetail />
+        </Route>
+        <Route path="/new-quote">
+          <NewQuote />
         </Route>
         <Route>
           <FourOFour />

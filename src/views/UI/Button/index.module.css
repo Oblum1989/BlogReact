@@ -28,3 +28,7 @@ button:active:disabled {
   color: #666666;
   cursor: not-allowed;
 }
+
+.button a {
+  color: white;
+}
