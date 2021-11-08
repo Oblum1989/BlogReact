@@ -16,6 +16,7 @@ export default function NavBar({ isAuthenticated, onLogout }) {
             <li className="navbar-bar__item"><Link to={`/age`}>User Age</Link></li>
             <li className="navbar-bar__item"><Link to={`/restaurant`}>Restaurant</Link></li>
             <li className="navbar-bar__item"><Link to={`/quotes`}>Quotes</Link></li>
+            <li className="navbar-bar__item"><Link to={`/cart`}>Cart</Link></li>
           </ul>}
           <Navigation isLoggedIn={isAuthenticated} onLogout={onLogout}/>
         </div>

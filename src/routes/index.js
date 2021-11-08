@@ -15,6 +15,7 @@ import Restaurant from "../views/Restaurant";
 import Quotes from "../views/Quotes";
 import NewQuote from "../views/Quotes/pages/NewQuote";
 import QuoteDetail from "../views/Quotes/pages/QuoteDetail";
+import CartShop from "../views/CartShop";
 
 export default function Routes() {
   const { isLoggedIn, setIsLoggedIn, loginHandler, logoutHandler } =
@@ -64,6 +65,9 @@ export default function Routes() {
         </Route>
         <Route path="/new-quote">
           <NewQuote />
+        </Route>
+        <Route path="/cart">
+          <CartShop />
         </Route>
         <Route>
           <FourOFour />
