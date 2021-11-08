@@ -1,20 +1,29 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import Loading from '../../../../components/Loading';
+import useHttp from '../../../../hooks/use-http';
+import { addComment } from "../../../../lib/api";
 
 import classes from './NewCommentForm.module.css';
 
-const NewCommentForm = (props) => {
-  const commentTextRef = useRef();
+const NewCommentForm = ({onAddedComment, quoteId}) => {
+  const commentTextRef = useRef()
+  const {sendRequest, status, error} = useHttp(addComment)
+
+  useEffect(() => {
+    if (status === 'completed' && !error) {
+      onAddedComment()
+    }
+  }, [status, onAddedComment, error])
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-
-    // optional: Could validate here
-
-    // send comment to server
+    const enteredText = commentTextRef.current.value
+    sendRequest({commentData: {text: enteredText}, quoteId: quoteId})
   };
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
+      {status === 'pendig' && <Loading title="Charging comments"/> }
       <div className={classes.control} onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
         <textarea id='comment' rows='5' ref={commentTextRef}></textarea>
