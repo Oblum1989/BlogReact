@@ -3,6 +3,8 @@ import { lazy, Suspense, useContext, useEffect } from "react";
 import PokemonContext from "../context/pokemons";
 import NavBar from "../views/UI/Navbar";
 import Loading from "../components/Loading";
+import ProductsPage from "../views/ProductsPage";
+import Favorites from "../views/ProductsPage/containers/Favorites";
 
 const Goals = lazy(() => import("../views/Goals"))
 const FourOFour = lazy(() => import("../views/404"))
@@ -73,6 +75,12 @@ export default function Routes() {
           </Route>
           <Route path="/cart">
             <CartShop />
+          </Route>
+          <Route path="/products">
+            <ProductsPage />
+          </Route>
+          <Route path="/favorites">
+            <Favorites />
           </Route>
           <Route>
             <FourOFour />
