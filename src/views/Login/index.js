@@ -11,6 +11,8 @@ const Login = ({onLogin}) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const [isLogin, setIsLogin] = useState(true);
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       setFormIsValid(
@@ -43,8 +45,13 @@ const Login = ({onLogin}) => {
     onLogin(enteredEmail, enteredPassword);
   };
 
+  const switchAuthModeHandler = () => {
+    setIsLogin((prevState) => !prevState);
+  };
+
   return (
     <Card className={classes.login}>
+      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
@@ -58,6 +65,7 @@ const Login = ({onLogin}) => {
             value={enteredEmail}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
+            required
           />
         </div>
         <div
@@ -72,11 +80,19 @@ const Login = ({onLogin}) => {
             value={enteredPassword}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
+            required
           />
         </div>
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            Login
+            {isLogin ? 'Login' : 'Create Account'}
+          </Button>
+          <Button
+            type='button'
+            className={classes.toggle}
+            onClick={switchAuthModeHandler}
+          >
+            {isLogin ? 'Create new account' : 'Login with existing account'}
           </Button>
         </div>
       </form>

@@ -5,6 +5,8 @@ import NavBar from "../views/UI/Navbar";
 import Loading from "../components/Loading";
 import ProductsPage from "../views/ProductsPage";
 import Favorites from "../views/ProductsPage/containers/Favorites";
+import Apps from "../views/Apps";
+import Profile from "../views/Profile";
 
 const Goals = lazy(() => import("../views/Goals"))
 const FourOFour = lazy(() => import("../views/404"))
@@ -81,6 +83,12 @@ export default function Routes() {
           </Route>
           <Route path="/favorites">
             <Favorites />
+          </Route>
+          <Route path="/apps">
+            <Apps />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route>
             <FourOFour />
