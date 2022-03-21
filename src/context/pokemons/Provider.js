@@ -67,11 +67,13 @@ export default function PokemonProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null)
   const [carState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCarState
   );
+
+  const userIsLoggedIn = !!token
 
   const getPokemons = async () => {
     try {
@@ -109,13 +111,63 @@ export default function PokemonProvider({ children }) {
     }
   };
   const loginHandler = (email, password) => {
-    localStorage.setItem("isLoggedIn", "1");
-    setIsLoggedIn(true);
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCj2XOz_1moMGZS8odimhmRlvub9x_nbPg",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(response => {
+      if (response.ok) {
+        localStorage.setItem("isLoggedIn", "1");
+        response.json().then(data => {
+          setToken(data.idToken)
+        })
+      }else{
+        response.json().then(data => {
+          alert(data.error.message);
+        })
+      }
+    })
   };
 
+  const SignupHandler = (email, password) => {
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCj2XOz_1moMGZS8odimhmRlvub9x_nbPg",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(response => {
+      if (response.ok) {
+        response.json().then(data => {
+          setToken(data.idToken)
+        })
+      }else{
+        response.json().then(data => {
+          console.log(data);
+          alert(data.error.message);
+        })
+      }
+    })
+  };
   const logoutHandler = () => {
     localStorage.setItem("isLoggedIn", "0");
-    setIsLoggedIn(false);
+    setToken(null)
   };
 
   const addItemToCartHandler = (item) => {
@@ -130,12 +182,27 @@ export default function PokemonProvider({ children }) {
     dispatchCartAction({ type: "CLEAR" });
   };
 
+  const loginTokenHandler = (token) => {
+    setToken(token)
+  }
+
+  const logoutTokenHandler = (token) => {
+    setToken(null)
+  }
+
   const cartContext = {
     items: carState.items,
     totalAmount: carState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartHandler,
-    clearCart: clearCartHandler
+    clearCart: clearCartHandler,
+  };
+
+  const authContext = {
+    token: token,
+    isLoggedIn: userIsLoggedIn,
+    login: loginTokenHandler,
+    logout: logoutTokenHandler,
   };
 
   return (
@@ -149,11 +216,11 @@ export default function PokemonProvider({ children }) {
         setIsLoading,
         errorMessage,
         hasError,
-        isLoggedIn,
-        setIsLoggedIn,
         loginHandler,
+        SignupHandler,
         logoutHandler,
         cartContext,
+        authContext,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import Card from '../UI/Card';
 import classes from './index.module.css';
 import Button from '../UI/Button';
 
-const Login = ({onLogin}) => {
+const Login = ({onLogin, onSignup}) => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
@@ -42,7 +42,11 @@ const Login = ({onLogin}) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    onLogin(enteredEmail, enteredPassword);
+    if (isLogin) {
+      onLogin(enteredEmail, enteredPassword);
+    }else{
+      onSignup(enteredEmail, enteredPassword)
+    }
   };
 
   const switchAuthModeHandler = () => {

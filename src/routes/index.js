@@ -24,26 +24,26 @@ const QuoteDetail = lazy(() => import("../views/Quotes/pages/QuoteDetail"))
 const CartShop = lazy(() => import("../views/CartShop"))
 
 export default function Routes() {
-  const { isLoggedIn, setIsLoggedIn, loginHandler, logoutHandler } =
+  const { loginHandler, logoutHandler, SignupHandler, authContext } =
     useContext(PokemonContext);
 
   useEffect(() => {
     const storedUserLoggedInformation = localStorage.getItem("isLoggedIn");
     if (storedUserLoggedInformation === "1") {
-      setIsLoggedIn(true);
+      authContext.login(authContext.token);
     }
   }, []);
 
   return (
     <Router>
-      <NavBar isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <NavBar isAuthenticated={authContext.isLoggedIn} onLogout={logoutHandler} />
       <Suspense fallback={
         <Loading title="Loading!"/>
       }>
         <Switch>
           <Route path="/" exact>
-            {!isLoggedIn && <Login onLogin={loginHandler} />}
-            {isLoggedIn && <Home onLogin={loginHandler} />}
+            {!authContext.isLoggedIn && <Login onLogin={loginHandler} onSignup={SignupHandler} />}
+            {authContext.isLoggedIn && <Home onLogin={loginHandler} />}
           </Route>
           <Route path="/pokemons">
             <Pokemons />
